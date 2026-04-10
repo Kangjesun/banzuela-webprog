@@ -17,11 +17,12 @@ function NotFoundPage() {
         
         <div className="mt-6 h-px w-100 mx-auto bg-[#C9A227]/60"></div>
   
-        <h1 className="text-4xl sm:text-5xl  font-semibold tracking-tight text-[#1A1A1A] " style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+        <h1 className="text-4xl sm:text-5xl  font-semibold tracking-tight text-[#1A1A1A] "
+         style={{ fontFamily: '"Cormorant Garamond", serif' }}>
           Page Not Found
         </h1>
         <p className="mt-4 text-sm sm:text-base text-zinc-600 leading-7">
-          The page you are looking for doesn’t exist or has been moved.
+          The page you are looking for doesn’t exist or has been broken.
           Please check the URL or return to the homepage.
         </p>
 
