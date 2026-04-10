@@ -9,7 +9,7 @@ const AboutPage = () => {
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <div className="rounded-3xl border-2 border-dashed border-[#C9A227] bg-[#F8F6F2] p-6">
             <div className="flex min-h-72 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-              <img src="/src/assets/styles/AboutImage.jpg" alt="Fashion Studio" className="h-full w-full object-contain rounded-lg"/>
+              <img src="/src/assets/images/AboutImage.jpg" alt="Fashion Studio" className="h-full w-full object-contain rounded-lg"/>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ const AboutPage = () => {
               {[1, 2, 3, 4].map((item) => (
                 <div key={item} className="flex aspect-square items-center justify-center rounded-[1.25rem] bg-[#FFF0F5]">
                   <img
-                    src={`/src/assets/styles/about-grid${item}.jpg`}
+                    src={`/src/assets/images/about-grid${item}.jpg`}
                     alt={`Inspiration ${item}`}
                     className="border-2 border-zinc-300 bg-zinc-100 h-full w-full object-contain rounded-lg"
                   />

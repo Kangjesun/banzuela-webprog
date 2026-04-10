@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import logo from '../styles/Vogue Avenue1.png';
+import logo from "../assets/images/VogueAvenue1.png";
 
 const links = [
   { label: 'Home', to: '/' },

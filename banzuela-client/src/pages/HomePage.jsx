@@ -28,7 +28,7 @@ const HomePage = () => {
 
           <div className="rounded-3xl border-2 border-dashed border-[#C9A227] bg-[#F8F6F2] p-6">
             <div className="flex min-h-64 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-              <img src="/src/assets/styles/HomeImage.jpg" alt="Home Image" className="h-full w-full object-contain rounded-[1.25rem]"/>
+              <img src="/src/assets/images/HomeImage.jpg" alt="Home Image" className="h-full w-full object-contain rounded-[1.25rem]"/>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ const HomePage = () => {
         <div className="grid gap-4 md:grid-cols-3">
            <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
               <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/styles/FC1.jpg" alt="Latest Collection" className="h-full w-full object-cover rounded-xl" />
+                <img src="/src/assets/images/FC1.jpg" alt="Latest Collection" className="h-full w-full object-cover rounded-xl" />
               </div>
               <h3 className="mt-4 text-lg font-semibold text-zinc-900">Latest Collection Spotlight</h3>
               <p className="mt-3 text-sm leading-6 text-zinc-600">
@@ -99,7 +99,7 @@ const HomePage = () => {
 
           <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
               <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/styles/FC2.jpg" alt="Designer Interview" className="h-full w-full object-cover rounded-xl" />
+                <img src="/src/assets/images/FC2.jpg" alt="Designer Interview" className="h-full w-full object-cover rounded-xl" />
                </div>
               <h3 className="mt-4 text-lg font-semibold text-[#0B0B0C]">Designer Interviews</h3>
               <p className="mt-3 text-sm leading-6 text-[#6B6B6B]">
@@ -110,7 +110,7 @@ const HomePage = () => {
 
           <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
               <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/styles/FC3.jpg" alt="Styling Tips" className="h-full w-full object-cover rounded-xl" />
+                <img src="/src/assets/images/FC3.jpg" alt="Styling Tips" className="h-full w-full object-cover rounded-xl" />
               </div>
               <h3 className="mt-4 text-lg font-semibold text-zinc-900">Styling Tips & Trends</h3>
               <p className="mt-3 text-sm leading-6 text-zinc-600">
@@ -121,7 +121,7 @@ const HomePage = () => {
 
           <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
               <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/styles/FC4.jpg" alt="Fashion News" className="h-full w-full object-cover rounded-xl" />
+                <img src="/src/assets/images/FC4.jpg" alt="Fashion News" className="h-full w-full object-cover rounded-xl" />
                </div>
               <h3 className="mt-4 text-lg font-semibold text-zinc-900">Fashion News</h3>
               <p className="mt-3 text-sm leading-6 text-zinc-600">
