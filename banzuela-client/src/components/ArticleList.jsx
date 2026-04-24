@@ -22,7 +22,6 @@ const ArticleList = ({ articles }) => {
               />
             </div>
 
-            {/* Article Meta */}
             <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-500">
               Article {String(index + 1).padStart(2, "0")}
             </p>
