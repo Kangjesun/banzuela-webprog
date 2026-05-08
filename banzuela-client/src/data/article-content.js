@@ -1,7 +1,7 @@
-import Art1 from "./images/Art1.jpg";
-import Art2 from "./images/Art2.jpg";
-import Art3 from "./images/Art3.jpg";
-import Art4 from "./images/Art4.jpg";
+import Art1 from "../assets/images/Art1.jpg";
+import Art2 from "../assets/images/Art2.jpg";
+import Art3 from "../assets/images/Art3.jpg";
+import Art4 from "../assets/images/Art4.jpg";
 
 
 const articles = [
@@ -56,7 +56,6 @@ const articles = [
       "Editorial picks are perfect for fashion enthusiasts looking for inspiration and guidance."
     ],
   },
-
 ];
  
 export default articles;

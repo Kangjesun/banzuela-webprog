@@ -259,10 +259,19 @@ const DashLayout = () => {
       </Drawer>
 
       {/* Page Content */}
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Outlet />
-      </Box>
+<Box
+  component="main"
+  sx={{
+    flexGrow: 1,
+    p: 3,
+    width: '100%',
+    minWidth: 0,
+    overflowX: 'hidden',
+  }}
+>
+  <DrawerHeader />
+  <Outlet />
+</Box>
     </Box>
   );
 };
