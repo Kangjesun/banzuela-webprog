@@ -6,13 +6,11 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { DataGrid } from "@mui/x-data-grid";
 
-/* ================= ICONS ================= */
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-/* ================= BLOG ANALYTICS DATA ================= */
 
 const reportRows = [
   { id: 1, month: "Jan", reads: 1200, engagement: 240, category: "Styling Tips" },
@@ -32,17 +30,15 @@ const columns = [
 function ReportsPage() {
   return (
     <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
-
-      {/* ================= HEADER ================= */}
       <Typography variant="h4" fontWeight="bold" sx={{ mb: 5 }}>
         Reports
       </Typography>
 
-      {/* ================= KPI CARDS ================= */}
+      {/*KPI CARDS*/}
       <Box sx={{ mb: 7 }}>
         <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
 
-          {/* TOTAL READS */}
+      
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -56,8 +52,7 @@ function ReportsPage() {
               </Stack>
             </CardContent>
           </Card>
-
-          {/* ENGAGEMENT */}
+          
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -72,7 +67,6 @@ function ReportsPage() {
             </CardContent>
           </Card>
 
-          {/* CATEGORY */}
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -87,7 +81,6 @@ function ReportsPage() {
             </CardContent>
           </Card>
 
-          {/* BRAND KPI */}
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -105,7 +98,7 @@ function ReportsPage() {
         </Stack>
       </Box>
 
-      {/* ================= BLOG ANALYTICS ================= */}
+      {/*BLOG ANALYTICS*/}
       <Typography variant="h6" sx={{ mb: 3 }}>
         Editorial Performance Overview
       </Typography>
@@ -157,7 +150,7 @@ function ReportsPage() {
         </Stack>
       </Box>
 
-      {/* ================= PIE CHART ================= */}
+      {/*PIE CHART*/}
       <Box sx={{ mb: 7 }}>
         <Typography variant="h6" sx={{ mb: 3 }}>
           Reader Interest Breakdown
@@ -180,7 +173,7 @@ function ReportsPage() {
         </Card>
       </Box>
 
-      {/* ================= TABLE ================= */}
+      {/*TABLE */}
       <Typography variant="h6" sx={{ mb: 3 }}>
         Blog Content Performance Table
       </Typography>
@@ -203,7 +196,7 @@ function ReportsPage() {
   );
 }
 
-/* ================= STYLES ================= */
+/*STYLES */
 const cardStyle = {
   flex: 1,
   borderRadius: 3,
