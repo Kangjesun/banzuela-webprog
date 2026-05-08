@@ -14,13 +14,13 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import { Gauge } from "@mui/x-charts/Gauge";
 import { DataGrid } from "@mui/x-data-grid";
 
-/* ================= ICONS ================= */
+/* ICON */
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-/* ================= DATA ================= */
+
 const reportRows = [
   { id: 1, month: "Jan", reads: 1200, engagement: 240, category: "Styling Tips" },
   { id: 2, month: "Feb", reads: 1800, engagement: 310, category: "Fashion Trends" },
@@ -39,7 +39,6 @@ const columns = [
 function ReportsPage() {
   const printRef = useRef(null);
 
-  /* LAB 6 PRINT FUNCTION  */
   const handlePrint = () => {
     const content = printRef.current;
     if (!content) return;
@@ -77,7 +76,7 @@ function ReportsPage() {
   return (
     <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
 
-      {/* ================= HEADER ================= */}
+      {/*HEADER */}
       <Stack
   direction="row"
   justifyContent="space-between"
@@ -107,7 +106,7 @@ function ReportsPage() {
 
       <Box ref={printRef}>
 
-        {/* ================= KPI CARDS (LAB 5) ================= */}
+        {/*KPI CARDS*/}
         <Box sx={{ mb: 7 }}>
           <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
 
@@ -162,7 +161,7 @@ function ReportsPage() {
           </Stack>
         </Box>
 
-        {/* ================= CHARTS (LAB 5 STYLE) ================= */}
+        {/*CHARTS*/}
         <Stack direction={{ xs: "column", md: "row" }} spacing={3} sx={{ mb: 7 }}>
 
           <Card sx={chartCard}>
@@ -191,7 +190,7 @@ function ReportsPage() {
 
         </Stack>
 
-        {/* ================= PIE + GAUGE (LAB 6 ADDITION) ================= */}
+        {/*PIE*/}
         <Stack direction={{ xs: "column", md: "row" }} spacing={3} sx={{ mb: 7 }}>
 
           <Card sx={chartCard}>
@@ -226,7 +225,7 @@ function ReportsPage() {
 
         </Stack>
 
-        {/* ================= TABLE (LAB 5 STYLE) ================= */}
+        {/*TABLE*/}
         <Typography variant="h6" sx={{ mb: 3 }}>
           Blog Performance Table
         </Typography>
@@ -248,7 +247,7 @@ function ReportsPage() {
   );
 }
 
-/* ================= STYLES ================= */
+/* STYLES */
 const cardStyle = {
   flex: 1,
   borderRadius: 3,
