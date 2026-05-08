@@ -3,12 +3,9 @@ import { Box, Typography, Card, CardContent } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 
-/* ================= ICONS ================= */
 import GroupIcon from "@mui/icons-material/Group";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-
-/* ================= HARD-CODED USERS DATA ================= */
 
 const usersRows = [
   { id: 1, firstName: "Jon", lastName: "Snow", age: 14 },
@@ -21,8 +18,6 @@ const usersRows = [
   { id: 8, firstName: "Rossini", lastName: "Frances", age: 36 },
   { id: 9, firstName: "Harvey", lastName: "Roxie", age: 65 },
 ];
-
-/* ================= TABLE COLUMNS ================= */
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -43,18 +38,15 @@ function UsersPage() {
 
   return (
     <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
-
-      {/* ================= HEADER ================= */}
       <Typography variant="h4" fontWeight="bold" sx={{ mb: 4 }}>
         Users
       </Typography>
 
 
-      {/* ================= SUMMARY CARDS ================= */}
+      {/* SUMMARY CARDS */}
       <Box sx={{ mb: 4 }}>
         <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
 
-          {/* TOTAL USERS */}
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -69,7 +61,6 @@ function UsersPage() {
             </CardContent>
           </Card>
 
-          {/* ACTIVE READERS */}
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -84,7 +75,6 @@ function UsersPage() {
             </CardContent>
           </Card>
 
-          {/* GROWTH */}
           <Card sx={cardStyle}>
             <CardContent>
               <Stack direction="row" spacing={2} alignItems="center">
@@ -125,7 +115,7 @@ function UsersPage() {
   );
 }
 
-/* ================= STYLES ================= */
+/* STYLES  */
 const cardStyle = {
   flex: 1,
   borderRadius: 3,
