@@ -1,0 +1,5 @@
+banzuela-server/.env
+banzuela-server/node_modules
+
+banzuela-client/.env
+banzuela-client/node_modules
