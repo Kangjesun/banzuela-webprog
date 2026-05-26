@@ -74,9 +74,7 @@ function ReportsPage() {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
-
-      {/*HEADER */}
+    <Box sx={{ p: 3, backgroundColor: "#F5F1E8", minHeight: "100vh", color: "#111111" }}>
       <Stack
   direction="row"
   justifyContent="space-between"
@@ -98,9 +96,40 @@ function ReportsPage() {
   spacing={1.5}
   sx={{ ml: "auto" }}
 >
-  <Button variant="contained">Generate</Button>
-  <Button variant="outlined" onClick={handlePrint}>Export</Button>
-  <Button variant="outlined">Filter</Button>
+  <Button variant="contained"
+  sx={{
+      backgroundColor: "#111111",
+      color: "#FFFFFF",
+      "&:hover": {
+        backgroundColor: "#000000",
+      },
+    }}>
+      Generate
+      </Button>
+
+  <Button variant="outlined" onClick={handlePrint}
+  sx={{
+      borderColor: "#C8A96B",
+      color: "#111111",
+      "&:hover": {
+        borderColor: "#D4AF37",
+        backgroundColor: "#F5F1E8",
+      },
+    }}>
+      Export
+      </Button>
+    
+  <Button variant="outlined"
+  sx={{
+      borderColor: "#C8A96B",
+      color: "#111111",
+      "&:hover": {
+        borderColor: "#D4AF37",
+        backgroundColor: "#F5F1E8",
+      },
+    }}>
+      Filter
+      </Button>
 </Stack>
 </Stack>
 
@@ -171,7 +200,7 @@ function ReportsPage() {
 
             <LineChart
               height={280}
-              series={[{ data: [1200, 1800, 1500, 2200, 2600], label: "Reads" }]}
+              series={[{ data: [1200, 1800, 1500, 2200, 2600], label: "Reads", color: "#111111" }]}
               xAxis={[{ data: ["Jan", "Feb", "Mar", "Apr", "May"], scaleType: "band" }]}
             />
           </Card>
@@ -183,7 +212,7 @@ function ReportsPage() {
 
             <BarChart
               height={280}
-              series={[{ data: [240, 310, 280, 400, 450], label: "Engagement" }]}
+              series={[{ data: [240, 310, 280, 400, 450], label: "Engagement", color: "#C8A96B" }]}
               xAxis={[{ data: ["Jan", "Feb", "Mar", "Apr", "May"], scaleType: "band" }]}
             />
           </Card>
@@ -202,9 +231,9 @@ function ReportsPage() {
               series={[
                 {
                   data: [
-                    { id: 0, value: 40, label: "Fashion" },
-                    { id: 1, value: 35, label: "Tips" },
-                    { id: 2, value: 25, label: "Luxury" },
+                    { id: 0, value: 40, label: "Fashion", color: "#111111"},
+                    { id: 1, value: 35, label: "Tips", color: "#C8A96B"}, 
+                    { id: 2, value: 25, label: "Luxury", color: "#E8DFCF" },
                   ],
                 },
               ]}
@@ -219,7 +248,18 @@ function ReportsPage() {
             </Typography>
 
             <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-              <Gauge width={180} height={180} value={78} />
+              <Gauge width={180} height={180} value={78}
+               sx={{
+        "& .MuiGauge-valueArc": {
+          fill: "#C8A96B",
+        },
+        "& .MuiGauge-referenceArc": {
+          fill: "#E8DFCF",
+        },
+        "& .MuiGauge-valueText": {
+          fill: "#111111",
+        },
+      }} />
             </Box>
           </Card>
 
@@ -238,7 +278,22 @@ function ReportsPage() {
             initialState={{
               pagination: { paginationModel: { pageSize: 5 } },
             }}
+
+            sx={{
+    border: "none",
+
+    "& .MuiDataGrid-columnHeaders": {
+      backgroundColor: "#111111",
+      color: "#000000",
+      fontWeight: "bold",
+    },
+
+    "& .MuiDataGrid-row:hover": {
+      backgroundColor: "#C8A96B",
+    },
+  }}
             disableRowSelectionOnClick
+
           />
         </Card>
 

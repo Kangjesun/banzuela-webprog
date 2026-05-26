@@ -3,11 +3,12 @@ import Art2 from "../assets/images/Art2.jpg";
 import Art3 from "../assets/images/Art3.jpg";
 import Art4 from "../assets/images/Art4.jpg";
 
-
 const articles = [
   {
+    id: 1,
     name: "spring-collection-highlights",
     title: "Spring Collection Highlights",
+    slug: "spring-collection-highlights",
     image: Art1,
     content: [
       "Explore this season’s fresh silhouettes, colors, and runway inspirations.",
@@ -19,8 +20,10 @@ const articles = [
   },
 
   {
+    id: 2,
     name: "street-style-trends",
     title: "Street Style Trends",
+    slug: "street-style-trends",
     image: Art2,
     content: [
       "From city streets to social feeds, see how the latest looks are styled.",
@@ -30,10 +33,12 @@ const articles = [
       "Street style is all about personal expression, letting fashion enthusiasts experiment freely."
     ],
   },
-  
+
   {
+    id: 3,
     name: "exclusive-designer-interview",
     title: "Exclusive Designer Interview",
+    slug: "exclusive-designer-interview",
     image: Art3,
     content: [
       "Get insider tips and inspirations straight from top fashion designers.",
@@ -43,10 +48,12 @@ const articles = [
       "Readers gain advice on styling, sustainability, and how to incorporate runway trends into everyday fashion."
     ],
   },
-   
-   {
+
+  {
+    id: 4,
     name: "fashion-editorial-picks",
     title: "Fashion Editorial Picks",
+    slug: "fashion-editorial-picks",
     image: Art4,
     content: [
       "Curated highlights from top fashion magazines and runway shows.",
@@ -57,5 +64,5 @@ const articles = [
     ],
   },
 ];
- 
+
 export default articles;

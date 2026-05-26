@@ -1,41 +1,63 @@
+import { useEffect, useState } from "react";
+
 import Button from "../../components/Button";
 import ArticleList from "../../components/ArticleList";
-import articles from "../../data/article-content.js";
+
+import staticArticles from "../../data/article-content.js";
+import { fetchArticles } from "../../services/articleService";
 
 const ArticleListPage = () => {
+  const [staticData, setStaticData] = useState([]);
+  const [dbData, setDbData] = useState([]);
+
+  useEffect(() => {
+    loadArticles();
+  }, []);
+
+  const loadArticles = async () => {
+    try {
+      const { data } = await fetchArticles();
+
+      const dbArticles = Array.isArray(data.articles)
+        ? data.articles
+        : [];
+
+      // STATIC FIRST, DB AFTER (your requirement)
+      setStaticData(staticArticles);
+      setDbData(dbArticles);
+    } catch (err) {
+      console.error(err);
+
+      setStaticData(staticArticles);
+      setDbData([]);
+    }
+  };
+
   return (
     <div className="flex w-full flex-col gap-6">
+      {/* HEADER */}
       <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500">
           Articles
         </p>
 
         <h1 className="max-w-xl text-3xl font-bold leading-tight text-zinc-900 sm:text-4xl">
-           Explore the Latest Fashion Insights
+          Explore the Latest Fashion Insights
         </h1>
 
-        <p className="mt-4 max-w-lg text-sm leading-7 text-zinc-600 sm:text-base">
-          Discover trending styles, designer highlights, and editorial picks
-          curated for the fashion-savvy reader.
-        </p>
-
         <div className="mt-6">
-          <Button to="/"  variant="primary">Back Home</Button>
+          <Button to="/" variant="primary">
+            Back Home
+          </Button>
         </div>
       </section>
 
+      {/* LIST */}
       <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-        <div className="mb-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500">
-            Featured Articles
-          </p>
-
-          <h2 className="mt-2 text-2xl font-semibold text-zinc-900">
-            Article card grid
-          </h2>
-        </div>
-
-        <ArticleList articles={articles} />
+        <ArticleList
+          staticArticles={staticData}
+          dbArticles={dbData}
+        />
       </section>
     </div>
   );

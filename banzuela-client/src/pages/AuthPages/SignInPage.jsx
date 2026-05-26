@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import Button from "../../components/Button";
+import { loginUser } from "../../services/UserService";
 
 const inputClasses =
   "mt-2 w-full rounded-xl border border-white/30 bg-[#1A1A1A] px-4 py-3 text-sm text-[#F5F5F5] outline-none transition placeholder:text-[#8A8A8A] focus:border-[#D4AF37] focus:bg-[#1A1A1A]";
@@ -8,6 +11,55 @@ const actionButtonClassName =
   "w-full rounded-xl py-3 text-[11px] tracking-[0.2em]";
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    setError("");
+
+    const { data } = await loginUser(formData);
+
+    // 🔒 Block viewer accounts
+    if (data.user.type === "viewer") {
+      setError("Viewer accounts cannot log in.");
+      return; // stop login
+    }
+
+    // store token
+    localStorage.setItem("token", data.token);
+
+    // store user info
+    localStorage.setItem(
+      "user",
+      JSON.stringify(data.user)
+    );
+
+    // redirect after login
+    navigate("/dashboard");
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+        "Login failed"
+    );
+  }
+};
+
   return (
     <>
       <h1 className="text-3xl font-bold tracking-tight !text-white sm:text-4xl">
@@ -18,30 +70,55 @@ const SignInPage = () => {
         Return to a world of curated style, timeless aesthetics, and modern expression.
       </p>
 
-      <form className="mt-8 space-y-5">
+      {error && (
+        <p className="mt-4 text-sm text-red-500">
+          {error}
+        </p>
+      )}
+
+      <form
+        className="mt-8 space-y-5"
+        onSubmit={handleLogin}
+      >
+        {/* EMAIL */}
         <div>
-          <label htmlFor="signin-email" className="text-sm font-medium text-white">
+          <label
+            htmlFor="signin-email"
+            className="text-sm font-medium text-white"
+          >
             Email Address
           </label>
+
           <input
             id="signin-email"
             type="email"
+            name="email"
             placeholder="Enter your email"
             autoComplete="email"
             className={inputClasses}
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
 
+        {/* PASSWORD */}
         <div>
-          <label htmlFor="signin-password" className="text-sm font-medium text-white">
+          <label
+            htmlFor="signin-password"
+            className="text-sm font-medium text-white"
+          >
             Password
           </label>
+
           <input
             id="signin-password"
             type="password"
+            name="password"
             placeholder="Enter your password"
             autoComplete="current-password"
             className={inputClasses}
+            value={formData.password}
+            onChange={handleChange}
           />
 
           <p className="mt-2 text-xs leading-5 text-[#8A8A8A]">
@@ -49,6 +126,7 @@ const SignInPage = () => {
           </p>
         </div>
 
+        {/* REMEMBER + FORGOT */}
         <div className="flex items-center justify-between gap-4 text-sm">
           <label className="flex items-center gap-2 text-white">
             <input
@@ -66,21 +144,36 @@ const SignInPage = () => {
           </button>
         </div>
 
-        <Button type="submit" variant="secondary" className={actionButtonClassName}>
+        {/* LOGIN BUTTON */}
+        <Button
+          type="submit"
+          variant="secondary"
+          className={actionButtonClassName}
+        >
           Log In
         </Button>
 
+        {/* SOCIAL LOGIN (UI ONLY) */}
         <div className="grid gap-3 pt-2 sm:grid-cols-2">
-          <Button type="button" variant="primary" className={actionButtonClassName}>
+          <Button
+            type="button"
+            variant="primary"
+            className={actionButtonClassName}
+          >
             Log In with Google
           </Button>
 
-          <Button type="button" variant="primary" className={actionButtonClassName}>
+          <Button
+            type="button"
+            variant="primary"
+            className={actionButtonClassName}
+          >
             Log In with Apple
           </Button>
         </div>
       </form>
 
+      {/* SIGNUP LINK */}
       <div className="mt-8 border-t border-[#2A2A2A] pt-6 text-sm text-[#B8B8B8]">
         No account yet?{" "}
         <Link

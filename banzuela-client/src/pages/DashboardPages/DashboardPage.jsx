@@ -52,9 +52,15 @@ function DashboardPage() {
     valid.reduce((a, b) => a + b.age, 0) / valid.length;
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
+    <Box sx={{ p: 3, backgroundColor: "#F5F1E8", minHeight: "100vh", color: "#111111"}}>
 
-      <Typography variant="h4" fontWeight="bold" sx={{ mb: 5 }}>
+      <Typography variant="h4"
+  fontWeight="700"
+  sx={{
+    mb: 5,
+    color: "#111111",
+    letterSpacing: "0.5px",
+  }}>
         Dashboard
       </Typography>
 
@@ -127,7 +133,13 @@ function DashboardPage() {
 
       {/*  ANALYTICS  */}
       <Box sx={{ mb: 7 }}>
-        <Typography variant="h6" sx={{ mb: 3 }}>
+        <Typography variant="h6"
+  sx={{
+    mb: 3,
+    color: "#111111",
+    fontWeight: 600,
+    letterSpacing: "0.4px",
+  }}>
           Analytics
         </Typography>
 
@@ -137,8 +149,8 @@ function DashboardPage() {
             <BarChart
               height={280}
               series={[
-                { data: [35, 44, 24, 34], label: "Users" },
-                { data: [20, 30, 40, 50], label: "Growth" },
+                { data: [35, 44, 24, 34], label: "Users",  color: "#0B0B0B"},
+                { data: [20, 30, 40, 50], label: "Growth", color: "#C8A96B" },
               ]}
               xAxis={[{ data: ["Q1", "Q2", "Q3", "Q4"], scaleType: "band" }]}
             />
@@ -149,9 +161,9 @@ function DashboardPage() {
               series={[
                 {
                   data: [
-                    { id: 0, value: 40, label: "Fashion Trends" },
-                    { id: 1, value: 35, label: "Styling Tips" },
-                    { id: 2, value: 25, label: "Luxury Editorials" },
+                    { id: 0, value: 40, label: "Fashion Trends",  color: "#111111" },
+                    { id: 1, value: 35, label: "Styling Tips", color: "#C8A96B" },
+                    { id: 2, value: 25, label: "Luxury Editorials", color: "#E8DFCF" },
                   ],
                 },
               ]}
@@ -178,6 +190,20 @@ function DashboardPage() {
                 paginationModel: { pageSize: 5 },
               },
             }}
+ sx={{
+    border: "none",
+
+    "& .MuiDataGrid-columnHeaders": {
+      backgroundColor: "#111111",
+      color: "#000000",
+      fontWeight: "bold",
+    },
+
+    "& .MuiDataGrid-row:hover": {
+      backgroundColor: "#C8A96B",
+    },
+  }}
+
           />
         </Card>
       </Box>
@@ -188,7 +214,16 @@ function DashboardPage() {
           Location Map
         </Typography>
 
-        <Box sx={{ height: 500, width: "100%" }}>
+        <Box
+  sx={{
+    height: 500,
+    width: "100%",
+    borderRadius: 4,
+    overflow: "hidden",
+    border: "1px solid #E8DFCF",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+  }}
+>
           <MapContainer
             center={[14.604253, 120.994314]}
             zoom={13}

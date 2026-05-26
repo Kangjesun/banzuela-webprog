@@ -1,8 +1,41 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Button from "../../components/Button";
+import { fetchArticles } from "../../services/articleService";
 
 const HomePage = () => {
+  const [featuredArticles, setFeaturedArticles] = useState([]);
+
+  const navigate = useNavigate();
+
+  const goToArticle = (slug) => {
+    navigate(`/articles/${slug}`);
+  };
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const { data } = await fetchArticles();
+
+        const featured = (data?.articles || []).filter(
+          (a) => a.isPublished && a.articleType === "featured"
+        );
+
+        setFeaturedArticles(featured);
+      } catch (err) {
+        console.error(err);
+        setFeaturedArticles([]);
+      }
+    };
+
+    load();
+  }, []);
+
   return (
     <div className="flex w-full flex-col gap-6">
+
+      {/* HERO SECTION */}
       <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
@@ -15,7 +48,7 @@ const HomePage = () => {
             </h1>
 
             <p className="mt-4 max-w-lg text-sm leading-7 text-zinc-600 sm:text-base">
-              Step into Vogue Avenue and discover the style, trends, and lifestyle tips that make every day effortlessly elegant. 
+              Step into Vogue Avenue and discover the style, trends, and lifestyle tips that make every day effortlessly elegant.
               Your urban-chic journey starts here.
             </p>
 
@@ -28,12 +61,17 @@ const HomePage = () => {
 
           <div className="rounded-3xl border-2 border-dashed border-[#C9A227] bg-[#F8F6F2] p-6">
             <div className="flex min-h-64 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-              <img src="/src/assets/images/HomeImage.jpg" alt="Home Image" className="h-full w-full object-contain rounded-[1.25rem]"/>
+              <img
+                src="/src/assets/images/HomeImage.jpg"
+                alt="Home Image"
+                className="h-full w-full object-contain rounded-[1.25rem]"
+              />
             </div>
           </div>
         </div>
       </section>
 
+      {/* KPI SECTION */}
       <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="mb-6">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500">
@@ -75,61 +113,124 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* STATIC FEATURE CARDS */}
       <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="mb-6">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500">
             Feature Cards
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-zinc-900">
-              Vogue Avenue Highlights
+            Vogue Avenue Highlights
           </h2>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-           <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
-              <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/images/FC1.jpg" alt="Latest Collection" className="h-full w-full object-cover rounded-xl" />
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-zinc-900">Latest Collection Spotlight</h3>
-              <p className="mt-3 text-sm leading-6 text-zinc-600">
-                Showcasing the newest seasonal collection with exclusive designer insights.
-              </p>
-              <Button className="mt-4" variant="primary">View Collection</Button>
-            </article>
 
-          <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
-              <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/images/FC2.jpg" alt="Designer Interview" className="h-full w-full object-cover rounded-xl" />
-               </div>
-              <h3 className="mt-4 text-lg font-semibold text-[#0B0B0C]">Designer Interviews</h3>
-              <p className="mt-3 text-sm leading-6 text-[#6B6B6B]">
-                In-depth interviews with top fashion designers and emerging talents.
-              </p>
-              <Button className="mt-4" variant="primary">Read Interview</Button>
+          {/* CARD 1 */}
+          <article
+            onClick={() => goToArticle("spring-collection-highlights")}
+            className="cursor-pointer rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition"
+          >
+            <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
+              <img src="/src/assets/images/FC1.jpg" className="h-full w-full object-cover rounded-xl" />
+            </div>
+
+            <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+              Spring Collection Highlights
+            </h3>
+
+            <p className="mt-3 text-sm leading-6 text-zinc-600">
+              Explore this season’s fresh silhouettes and runway inspirations.
+            </p>
+
+            <Button className="mt-4" variant="primary">
+              View Collection
+            </Button>
           </article>
 
-          <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
-              <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/images/FC3.jpg" alt="Styling Tips" className="h-full w-full object-cover rounded-xl" />
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-zinc-900">Styling Tips & Trends</h3>
-              <p className="mt-3 text-sm leading-6 text-zinc-600">
-                Expert advice on styling, outfit combinations, and current fashion trends.
-              </p>
-              <Button className="mt-4" variant="primary">Explore Tips</Button>
-            </article>
+          {/* CARD 2 */}
+          <article
+            onClick={() => goToArticle("exclusive-designer-interview")}
+            className="cursor-pointer rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition"
+          >
+            <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
+              <img src="/src/assets/images/FC2.jpg" className="h-full w-full object-cover rounded-xl" />
+            </div>
 
-          <article className="rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition">
-              <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
-                <img src="/src/assets/images/FC4.jpg" alt="Fashion News" className="h-full w-full object-cover rounded-xl" />
-               </div>
-              <h3 className="mt-4 text-lg font-semibold text-zinc-900">Fashion News</h3>
-              <p className="mt-3 text-sm leading-6 text-zinc-600">
-                  Stay updated with the latest happenings in the fashion industry.
-              </p>
-              <Button className="mt-4" variant="primary">Read News</Button>
+            <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+              Exclusive Designer Interview
+            </h3>
+
+            <p className="mt-3 text-sm leading-6 text-zinc-600">
+              Get insider insights from top designers.
+            </p>
+
+            <Button className="mt-4" variant="primary">
+              Read Interview
+            </Button>
           </article>
+
+          {/* CARD 3 */}
+          <article
+            onClick={() => goToArticle("street-style-trends")}
+            className="cursor-pointer rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition"
+          >
+            <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
+              <img src="/src/assets/images/FC3.jpg" className="h-full w-full object-cover rounded-xl" />
+            </div>
+
+            <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+              Street Style Trends
+            </h3>
+
+            <p className="mt-3 text-sm leading-6 text-zinc-600">
+              Discover bold modern street fashion.
+            </p>
+
+            <Button className="mt-4" variant="primary">
+              Explore Tips
+            </Button>
+          </article>
+
         </div>
+
+        {/* DATABASE FEATURED ARTICLES */}
+        {featuredArticles.length > 0 && (
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {featuredArticles.map((article) => (
+              <article
+                key={article._id}
+                onClick={() => goToArticle(article.slug || article.name)}
+                className="relative cursor-pointer rounded-3xl border-2 border-[#C9A227] bg-[#F8F6F2] p-4 hover:shadow-lg transition"
+              >
+                <span className="absolute top-2 left-2 rounded-full bg-black px-2 py-1 text-xs text-white">
+                  Featured
+                </span>
+
+                <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] bg-[#FDE0EC]">
+                  <img
+                    src={article.image || "/src/assets/images/FC1.jpg"}
+                    className="h-full w-full object-cover rounded-xl"
+                  />
+                </div>
+
+                <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+                  {article.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-6 text-zinc-600">
+                  {Array.isArray(article.content)
+                    ? article.content[0]
+                    : article.content?.slice(0, 80)}
+                </p>
+
+                <Button className="mt-4" variant="primary">
+                  Read More
+                </Button>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

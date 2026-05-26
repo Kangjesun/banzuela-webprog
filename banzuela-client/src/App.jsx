@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import Layout from "./layouts/Layout";
 
@@ -17,6 +21,7 @@ import DashLayout from "./layouts/DashLayout";
 import DashboardPage from "./pages/DashboardPages/DashboardPage";
 import ReportsPage from "./pages/DashboardPages/ReportsPage";
 import UsersPage from "./pages/DashboardPages/UsersPage";
+import DashArticleListPage from "./pages/DashboardPages/DashArticleListPage";
 
 const routes = [
   {
@@ -60,21 +65,28 @@ const routes = [
   },
 
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: <DashLayout />,
-    errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
         element: <DashboardPage />,
       },
+
       {
         path: "reports",
         element: <ReportsPage />,
       },
+
       {
         path: "users",
         element: <UsersPage />,
+      },
+
+      // ✅ NEW ARTICLES DASHBOARD ROUTE
+      {
+        path: "articles",
+        element: <DashArticleListPage />,
       },
     ],
   },
@@ -83,7 +95,9 @@ const routes = [
 const router = createBrowserRouter(routes);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider router={router} />
+  );
 }
 
 export default App;

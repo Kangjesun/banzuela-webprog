@@ -14,10 +14,9 @@ const AuthLayout = () => {
                 backgroundImage: `url(${logo})`,
               }}
             />
-
           </div>
         </div>
-        {/* RIGHT SIDE (SAME BACKGROUND FLOW) */}
+
         <main className="flex items-center justify-center px-6 py-10 sm:px-10 lg:px-16">
           <div className="w-full max-w-md">
             <Outlet />
