@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../../components/Button";
-import { fetchArticles } from "../../services/articleService";
+import { fetchArticles } from "../../services/ArticleService";
 
 const HomePage = () => {
   const [featuredArticles, setFeaturedArticles] = useState([]);

@@ -24,7 +24,7 @@ import {
   fetchArticles,
   createArticle,
   updateArticle,
-} from "../../services/articleService";
+} from "../../services/ArticleService";
 
 const modalStyle = {
   position: "absolute",

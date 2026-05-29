@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import ArticleList from "../../components/ArticleList";
 
 import staticArticles from "../../data/article-content.js";
-import { fetchArticles } from "../../services/articleService";
+import { fetchArticles } from "../../services/ArticleService";
 
 
 const ArticleListPage = () => {
