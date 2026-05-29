@@ -83,7 +83,6 @@ const routes = [
         element: <UsersPage />,
       },
 
-      // ✅ NEW ARTICLES DASHBOARD ROUTE
       {
         path: "articles",
         element: <DashArticleListPage />,

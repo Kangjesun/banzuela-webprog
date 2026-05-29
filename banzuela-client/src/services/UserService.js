@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + "/users",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
-// GET TOKEN (for protected routes if needed)
+// GET TOKEN
 const getToken = () => localStorage.getItem("token");
 
 // AUTH HEADER
@@ -34,10 +34,12 @@ export const deleteUser = async (id) => {
   return await API.delete(`/${id}`, authHeader());
 };
 
-// LOGIN USER (NO TOKEN REQUIRED)
+// LOGIN USER
 export const loginUser = async (credentials) => {
-  return await axios.post(
-    "http://localhost:8000/api/users/login",
-    credentials
-  );
+  return await API.post("/login", credentials);
+};
+
+// REGISTER USER
+export const registerUser = async (data) => {
+  return await API.post("/", data);
 };
