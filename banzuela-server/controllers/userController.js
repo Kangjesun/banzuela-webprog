@@ -13,20 +13,85 @@ const getUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    if (!req.body.password) {
-      return res.status(400).json({ message: 'Password is required' });
+    const {
+      firstName,
+      lastName,
+      age,
+      gender,
+      contactNumber,
+      email,
+      username,
+      password,
+      address,
+    } = req.body;
+
+    if (!password) {
+      return res.status(400).json({
+        message: 'Password is required',
+      });
     }
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    const user = await User.create({
-      ...req.body,
-      password: hashedPassword,
+    const existingEmail = await User.findOne({
+      email,
     });
 
-    res.status(201).json(user);
+    if (existingEmail) {
+      return res.status(400).json({
+        message: 'Email already exists',
+      });
+    }
+
+    const existingUsername =
+      await User.findOne({ username });
+
+    if (existingUsername) {
+      return res.status(400).json({
+        message: 'Username already exists',
+      });
+    }
+
+    const hashedPassword =
+      await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      firstName,
+      lastName,
+      age,
+      gender,
+      contactNumber,
+      email,
+      username,
+      password: hashedPassword,
+      address,
+      type: 'viewer',
+    });
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+        type: user.type,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    return res.status(201).json({
+      message: 'Account created successfully',
+      token,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+        type: user.type,
+      },
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({
+      message: error.message,
+    });
   }
 };
 
@@ -75,11 +140,11 @@ const loginUser = async (req, res) => {
     }
 
 
-    //if (user.type === 'viewer') {
-     // return res.status(403).json({
-      //  message: 'Viewer accounts are not allowed to log in',
-     // });
-    //}
+    if (user.type === 'viewer') {
+        return res.status(403).json({
+        message: 'Viewer accounts are not allowed to log in',
+     });
+    }
 
     const isPasswordValid = await bcrypt.compare(
       password,

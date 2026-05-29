@@ -120,13 +120,13 @@ const UsersPage = () => {
   }
 
   // editors cannot access UsersPage, redirect to articles
-  if (user.type === "editor") {
-    navigate("/dashboard/articles");
+ if (user.type === "editor") {
+   navigate("/dashboard/articles");
     return;
   }
 
   // only admin can stay
-  if (user.type === "admin") {
+  if (user.type === "admin", "editor") {
     loadUsers();
   }
 }, [navigate]);
