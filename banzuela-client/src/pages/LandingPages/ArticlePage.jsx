@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Button from "../../components/Button";
+import { Chip } from "@mui/material";
+
 import staticArticles from "../../data/article-content.js";
 import { fetchArticles } from "../../services/ArticleService";
 
@@ -23,17 +25,20 @@ function ArticlePage() {
     loadArticles();
   }, []);
 
-  
+  // MERGE STATIC + DB
   const allArticles = [...staticArticles, ...dbArticles];
 
-
+  // NORMALIZE HELPER
   const normalize = (text) =>
     text?.toLowerCase().trim();
 
-  const article = allArticles.find(
-    (a) =>
-      normalize(a.name || a.slug) === normalize(name)
-  );
+  // FIXED MATCHING (slug OR name)
+  const article = allArticles.find((a) => {
+    return (
+      normalize(a.slug) === normalize(name) ||
+      normalize(a.name) === normalize(name)
+    );
+  });
 
   if (!article) {
     return (
@@ -53,6 +58,8 @@ function ArticlePage() {
     );
   }
 
+  const type = article.articleType?.toLowerCase() || "standard";
+
   return (
     <div className="flex w-full flex-col gap-6">
 
@@ -68,7 +75,15 @@ function ArticlePage() {
             Article
           </p>
 
-          <h1 className="text-3xl font-bold">
+          {/* TYPE BADGE */}
+          <Chip
+            label={type === "featured" ? "Featured" : "Standard"}
+            color={type === "featured" ? "warning" : "default"}
+            size="small"
+            className="mt-2"
+          />
+
+          <h1 className="text-3xl font-bold mt-3">
             {article.title}
           </h1>
 

@@ -338,12 +338,26 @@ const DashArticleListPage = () => {
         <Typography variant="h2">Articles</Typography>
 
         <Button
-          variant="contained"
-          startIcon={<AddCircleIcon />}
-          onClick={handleOpen}
-        >
-          Add Article
-        </Button>
+  variant="contained"
+  startIcon={<AddCircleIcon />}
+  onClick={handleOpen}
+  sx={{
+    backgroundColor: "#C8A96B", // luxury gold
+    color: "#111111", // deep black text
+    fontWeight: 600,
+    borderRadius: "12px",
+    padding: "8px 16px",
+    textTransform: "none",
+    boxShadow: "0 6px 16px rgba(0,0,0,0.15)",
+
+    "&:hover": {
+      backgroundColor: "#D4AF37", // richer gold hover
+      boxShadow: "0 8px 22px rgba(0,0,0,0.25)",
+    },
+  }}
+>
+  Add Article
+</Button>
       </Stack>
 
       {/* KPI */}

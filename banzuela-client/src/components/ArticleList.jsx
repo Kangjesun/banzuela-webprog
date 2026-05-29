@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const ArticleList = ({ staticArticles = [], dbArticles = [] }) => {
-
   const allArticles = [...staticArticles, ...dbArticles];
 
   return (
@@ -13,24 +12,43 @@ const ArticleList = ({ staticArticles = [], dbArticles = [] }) => {
         const slug = article.slug || article.name;
 
         const image =
-          article.image ||
-          "https://via.placeholder.com/400x300";
+          article.image || "https://via.placeholder.com/400x300";
 
         const title = article.title || "Untitled Article";
 
-        const contentPreview = Array.isArray(article.content)
-          ? article.content[0]
-          : typeof article.content === "string"
-          ? article.content
-          : "";
+        // ✅ FIXED CONTENT NORMALIZATION
+        const rawContent = Array.isArray(article.content)
+          ? article.content.join(" ")
+          : article.content || "";
+
+        const contentPreview =
+          rawContent.split(".")[0] + "."; // first sentence only
+
+        // fallback safety (if no period)
+        const safePreview =
+          contentPreview === "." ? rawContent.slice(0, 120) : contentPreview;
+
+        // ✅ TYPE (FEATURED / STANDARD)
+        const type = article.articleType || "standard";
 
         return (
           <article
             key={article._id || article.id || article.name || index}
-            className={`rounded-3xl border-2 p-4 border-[#C9A227] ${
+            className={`relative rounded-3xl border-2 p-4 border-[#C9A227] ${
               isDark ? "bg-[#1A1A1A]" : "bg-[#F8F6F2]"
             }`}
           >
+            {/* BADGE */}
+            <div className="absolute top-2 left-2">
+              <span
+                className={`rounded-full px-2 py-1 text-xs text-white ${
+                  type === "featured" ? "bg-yellow-500" : "bg-gray-500"
+                }`}
+              >
+                {type === "featured" ? "Featured" : "Standard"}
+              </span>
+            </div>
+
             {/* IMAGE */}
             <div className="flex aspect-[4/3] items-center justify-center rounded-[1.25rem] overflow-hidden bg-zinc-200">
               <img
@@ -54,14 +72,15 @@ const ArticleList = ({ staticArticles = [], dbArticles = [] }) => {
               {title}
             </h3>
 
-            {/* PREVIEW */}
+            {/* PREVIEW (FIXED - WILL NOT BREAK BOX) */}
             <p
               className={`mt-3 text-sm leading-6 ${
                 isDark ? "text-[#F8F6F2]" : "text-zinc-600"
               }`}
             >
-              {contentPreview.substring(0, 150)}
-              {contentPreview.length > 150 ? "..." : ""}
+              {safePreview.length > 120
+                ? safePreview.slice(0, 120) + "..."
+                : safePreview}
             </p>
 
             {/* LINK */}

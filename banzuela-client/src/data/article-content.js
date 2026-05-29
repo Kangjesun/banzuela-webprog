@@ -10,6 +10,7 @@ const articles = [
     title: "Spring Collection Highlights",
     slug: "spring-collection-highlights",
     image: Art1,
+    articleType: "standard",
     content: [
       "Explore this season’s fresh silhouettes, colors, and runway inspirations.",
       "Discover how designers mix textures, patterns, and color palettes to create standout looks.",
@@ -25,6 +26,7 @@ const articles = [
     title: "Street Style Trends",
     slug: "street-style-trends",
     image: Art2,
+    articleType: "standard",
     content: [
       "From city streets to social feeds, see how the latest looks are styled.",
       "Street style continues to blend comfort and statement pieces, showcasing individuality.",
@@ -40,6 +42,7 @@ const articles = [
     title: "Exclusive Designer Interview",
     slug: "exclusive-designer-interview",
     image: Art3,
+    articleType: "standard",
     content: [
       "Get insider tips and inspirations straight from top fashion designers.",
       "Learn about the creative process, favorite materials, and upcoming collections.",
@@ -55,6 +58,7 @@ const articles = [
     title: "Fashion Editorial Picks",
     slug: "fashion-editorial-picks",
     image: Art4,
+    articleType: "standard",
     content: [
       "Curated highlights from top fashion magazines and runway shows.",
       "From haute couture to ready-to-wear, each piece is selected for style and innovation.",

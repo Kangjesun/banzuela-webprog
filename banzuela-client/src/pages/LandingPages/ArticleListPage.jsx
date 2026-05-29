@@ -6,6 +6,7 @@ import ArticleList from "../../components/ArticleList";
 import staticArticles from "../../data/article-content.js";
 import { fetchArticles } from "../../services/articleService";
 
+
 const ArticleListPage = () => {
   const [staticData, setStaticData] = useState([]);
   const [dbData, setDbData] = useState([]);

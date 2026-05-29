@@ -413,19 +413,33 @@ const UsersPage = () => {
         </Typography>
 
         <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddCircleIcon />}
-          onClick={handleOpen}
-          sx={{
-            position: "fixed",
-            right: "20px",
-            top: "100px",
-            zIndex: 1000,
-          }}
-        >
-          Add User
-        </Button>
+  variant="contained"
+  startIcon={<AddCircleIcon />}
+  onClick={handleOpen}
+  sx={{
+    position: "fixed",
+    right: "20px",
+    top: "100px",
+    zIndex: 1000,
+
+    backgroundColor: "#C8A96B", // gold base
+    color: "#111111", // luxury black text
+    fontWeight: 600,
+    borderRadius: "14px",
+    padding: "10px 18px",
+    textTransform: "none",
+
+    boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
+
+    "&:hover": {
+      backgroundColor: "#D4AF37", // deeper gold hover
+      color: "#111111",
+      boxShadow: "0 8px 22px rgba(0,0,0,0.25)",
+    },
+  }}
+>
+  Add User
+</Button>
       </Stack>
 
       {/* KPI CARDS */}
