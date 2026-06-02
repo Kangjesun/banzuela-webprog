@@ -127,23 +127,23 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    if (!user.isActive) {
-      return res.status(403).json({
-        message: 'Your account is inactive. Please contact support.',
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email and password are required",
       });
     }
 
+    const user = await User.findOne({ email });
 
-    if (user.type === 'viewer') {
-        return res.status(403).json({
-        message: 'Viewer accounts are not allowed to log in',
-     });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // safer check (prevents crash)
+    if (!user.password) {
+      return res.status(500).json({
+        message: "User password missing in database",
+      });
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -153,7 +153,19 @@ const loginUser = async (req, res) => {
 
     if (!isPasswordValid) {
       return res.status(401).json({
-        message: 'Invalid credentials',
+        message: "Invalid credentials",
+      });
+    }
+
+    if (!user.isActive && user.isActive !== undefined) {
+      return res.status(403).json({
+        message: "Account is inactive",
+      });
+    }
+
+    if (user.type === "viewer") {
+      return res.status(403).json({
+        message: "Viewer accounts are not allowed to log in",
       });
     }
 
@@ -164,11 +176,11 @@ const loginUser = async (req, res) => {
         type: user.type,
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: "1h" }
     );
 
     return res.json({
-      message: 'Login successful',
+      message: "Login successful",
       token,
       user: {
         id: user._id,
@@ -178,7 +190,9 @@ const loginUser = async (req, res) => {
         lastName: user.lastName,
       },
     });
+
   } catch (error) {
+    console.error("LOGIN ERROR:", error); // IMPORTANT FOR VERCEL DEBUG
     res.status(500).json({ message: error.message });
   }
 };
