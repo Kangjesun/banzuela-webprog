@@ -4,8 +4,6 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-// users endpoints
-API.get("/api/users");
 
 // GET TOKEN
 const getToken = () => localStorage.getItem("token");
