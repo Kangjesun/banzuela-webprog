@@ -40,7 +40,7 @@ export const deleteUser = async (id) => {
 
 // LOGIN USER
 export const loginUser = async (credentials) => {
-  return await API.post("/login", credentials);
+  return await API.post("/api/users/login", credentials);
 };
 
 // REGISTER USER
