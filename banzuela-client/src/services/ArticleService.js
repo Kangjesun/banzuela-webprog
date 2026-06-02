@@ -1,31 +1,35 @@
-// services/articleService.js
-
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/articles";
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
-const getToken = () => {
-  return localStorage.getItem("token");
-};
+// GET TOKEN
+const getToken = () => localStorage.getItem("token");
 
+// AUTH HEADER
 const authHeader = () => ({
   headers: {
     Authorization: `Bearer ${getToken()}`,
   },
 });
 
+// FETCH ARTICLES
 export const fetchArticles = async () => {
-  return axios.get(API_URL, authHeader());
+  return API.get("/api/articles", authHeader());
 };
 
+// CREATE ARTICLE
 export const createArticle = async (data) => {
-  return axios.post(API_URL, data, authHeader());
+  return API.post("/api/articles", data, authHeader());
 };
 
+// UPDATE ARTICLE
 export const updateArticle = async (id, data) => {
-  return axios.put(`${API_URL}/${id}`, data, authHeader());
+  return API.put(`/api/articles/${id}`, data, authHeader());
 };
 
+// DELETE ARTICLE
 export const deleteArticle = async (id) => {
-  return axios.delete(`${API_URL}/${id}`, authHeader());
+  return API.delete(`/api/articles/${id}`, authHeader());
 };
