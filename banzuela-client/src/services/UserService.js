@@ -4,10 +4,6 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-// LOGIN
-API.post("/api/users/login");
-
-
 // GET TOKEN
 const getToken = () => localStorage.getItem("token");
 
@@ -20,22 +16,22 @@ const authHeader = () => ({
 
 // FETCH USERS
 export const fetchUsers = async () => {
-  return await API.get("/", authHeader());
+  return await API.get("/api/users", authHeader());
 };
 
-// CREATE USER
+// CREATE USER (ADMIN ONLY)
 export const createUser = async (user) => {
-  return await API.post("/", user, authHeader());
+  return await API.post("/api/users", user, authHeader());
 };
 
 // UPDATE USER
 export const updateUser = async (id, user) => {
-  return await API.put(`/${id}`, user, authHeader());
+  return await API.put(`/api/users/${id}`, user, authHeader());
 };
 
 // DELETE USER
 export const deleteUser = async (id) => {
-  return await API.delete(`/${id}`, authHeader());
+  return await API.delete(`/api/users/${id}`, authHeader());
 };
 
 // LOGIN USER
@@ -45,5 +41,5 @@ export const loginUser = async (credentials) => {
 
 // REGISTER USER
 export const registerUser = async (data) => {
-  return await API.post("/", data);
+  return await API.post("/api/users", data);
 };
